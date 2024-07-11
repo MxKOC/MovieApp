@@ -1,0 +1,14 @@
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\bin\Debug\net7.0\DatabaseLayer.deps.json
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\bin\Debug\net7.0\DatabaseLayer.dll
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\bin\Debug\net7.0\DatabaseLayer.pdb
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.AssemblyInfoInputs.cache
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.AssemblyInfo.cs
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.csproj.CoreCompileInputs.cache
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.dll
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\refint\DatabaseLayer.dll
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.pdb
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\ref\DatabaseLayer.dll
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\bin\Debug\net7.0\DatabaseLayer.runtimeconfig.json
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.csproj.AssemblyReference.cache
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.genruntimeconfig.cache
