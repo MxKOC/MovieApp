@@ -15,7 +15,7 @@ namespace DatabaseLayer.IdentityModels
         public string Rate { get; set; }
         public string WebPage { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
-        public ICollection<FavoriteArticle> FollowedWriters { get; set; }
+        public ICollection<FollowedWriter> FollowedWriters { get; set; }
 
 
 

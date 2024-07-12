@@ -13,17 +13,19 @@ namespace DataAccessLayer.Context
 {
     public class IdentityContext : IdentityDbContext<User>
     {
-        public DbSet<User> Users {  get; set; }
-        public DbSet<Writer> Writers {  get; set; }
-        public DbSet<Reader> Readers {  get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Writer> Writers { get; set; }
+        public DbSet<Reader> Readers { get; set; }
 
 
 
 
-    public IdentityContext(DbContextOptions<IdentityContext> options)
-        : base(options)
-    {
-    }
+        public IdentityContext(DbContextOptions<IdentityContext> options)
+            : base(options)
+        {
+        }
+
+
 
 
     }

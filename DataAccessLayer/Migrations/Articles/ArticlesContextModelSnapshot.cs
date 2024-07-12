@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DataAccessLayer.Migrations
+namespace DataAccessLayer.Migrations.Articles
 {
     [DbContext(typeof(ArticlesContext))]
     partial class ArticlesContextModelSnapshot : ModelSnapshot
@@ -104,9 +104,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ReaderId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("SecurityStamp")
@@ -252,53 +249,37 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("GenreId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("ReaderId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ReaderId1")
                         .HasColumnType("TEXT");
 
                     b.HasKey("CommentId");
 
                     b.HasIndex("ArticleId");
 
-                    b.HasIndex("GenreId");
-
                     b.HasIndex("ReaderId");
-
-                    b.HasIndex("ReaderId1");
 
                     b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.FavoriteArticle", b =>
                 {
-                    b.Property<string>("ReaderId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("FavoriteArticleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ArticleId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("FavoriteArticleId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ReaderId1")
+                    b.Property<string>("ReaderId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("WriterId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ReaderId", "ArticleId");
+                    b.HasKey("FavoriteArticleId");
 
                     b.HasIndex("ArticleId");
 
-                    b.HasIndex("ReaderId1");
-
-                    b.HasIndex("WriterId");
+                    b.HasIndex("ReaderId");
 
                     b.ToTable("FavoriteArticles");
                 });
@@ -453,19 +434,11 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DatabaseLayer.Models.Genre", null)
-                        .WithMany("FavoriteGenres")
-                        .HasForeignKey("GenreId");
-
                     b.HasOne("DatabaseLayer.IdentityModels.Reader", "Reader")
                         .WithMany("Comments")
                         .HasForeignKey("ReaderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DatabaseLayer.IdentityModels.Reader", null)
-                        .WithMany("FavoriteGenres")
-                        .HasForeignKey("ReaderId1");
 
                     b.Navigation("Article");
 
@@ -486,14 +459,6 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DatabaseLayer.IdentityModels.Reader", null)
-                        .WithMany("FollowedWriters")
-                        .HasForeignKey("ReaderId1");
-
-                    b.HasOne("DatabaseLayer.IdentityModels.Writer", null)
-                        .WithMany("FollowedWriters")
-                        .HasForeignKey("WriterId");
-
                     b.Navigation("Article");
 
                     b.Navigation("Reader");
@@ -502,13 +467,13 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DatabaseLayer.Models.FavoriteGenre", b =>
                 {
                     b.HasOne("DatabaseLayer.Models.Genre", "Genre")
-                        .WithMany()
+                        .WithMany("FavoriteGenres")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DatabaseLayer.IdentityModels.Reader", "Reader")
-                        .WithMany()
+                        .WithMany("FavoriteGenres")
                         .HasForeignKey("ReaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -521,13 +486,13 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DatabaseLayer.Models.FollowedWriter", b =>
                 {
                     b.HasOne("DatabaseLayer.IdentityModels.Reader", "Reader")
-                        .WithMany()
+                        .WithMany("FollowedWriters")
                         .HasForeignKey("ReaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DatabaseLayer.IdentityModels.Writer", "Writer")
-                        .WithMany()
+                        .WithMany("FollowedWriters")
                         .HasForeignKey("WriterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

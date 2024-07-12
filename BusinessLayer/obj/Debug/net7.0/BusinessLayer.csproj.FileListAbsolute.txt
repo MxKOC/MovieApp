@@ -15,3 +15,4 @@ C:\Users\Mkoc\source\repos\MovieApp\BusinessLayer\obj\Debug\net7.0\BusinessLayer
 C:\Users\Mkoc\source\repos\MovieApp\BusinessLayer\obj\Debug\net7.0\refint\BusinessLayer.dll
 C:\Users\Mkoc\source\repos\MovieApp\BusinessLayer\obj\Debug\net7.0\BusinessLayer.pdb
 C:\Users\Mkoc\source\repos\MovieApp\BusinessLayer\obj\Debug\net7.0\ref\BusinessLayer.dll
+C:\Users\Mkoc\source\repos\MovieApp\BusinessLayer\obj\Debug\net7.0\BusinessLayer.sourcelink.json

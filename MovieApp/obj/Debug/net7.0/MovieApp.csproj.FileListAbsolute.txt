@@ -269,3 +269,4 @@ C:\Users\Mkoc\source\repos\MovieApp\MovieApp\bin\Debug\net7.0\Microsoft.AspNetCo
 C:\Users\Mkoc\source\repos\MovieApp\MovieApp\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Mkoc\source\repos\MovieApp\MovieApp\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Mkoc\source\repos\MovieApp\MovieApp\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\Mkoc\source\repos\MovieApp\MovieApp\obj\Debug\net7.0\MovieApp.sourcelink.json

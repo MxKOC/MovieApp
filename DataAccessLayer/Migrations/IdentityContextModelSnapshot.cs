@@ -3,19 +3,16 @@ using System;
 using DataAccessLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace DataAccessLayer.Migrations
 {
-    [DbContext(typeof(ArticlesContext))]
-    [Migration("20240711074857_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(IdentityContext))]
+    partial class IdentityContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
@@ -109,9 +106,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ReaderId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
@@ -123,7 +117,78 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reader");
+                    b.ToTable("Readers");
+                });
+
+            modelBuilder.Entity("DatabaseLayer.IdentityModels.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MyProperty")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("DatabaseLayer.IdentityModels.Writer", b =>
@@ -193,7 +258,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Writer");
+                    b.ToTable("Writers");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Article", b =>
@@ -239,7 +304,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("WriterId");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Article");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Comment", b =>
@@ -255,55 +320,39 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("GenreId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("ReaderId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ReaderId1")
                         .HasColumnType("TEXT");
 
                     b.HasKey("CommentId");
 
                     b.HasIndex("ArticleId");
 
-                    b.HasIndex("GenreId");
-
                     b.HasIndex("ReaderId");
 
-                    b.HasIndex("ReaderId1");
-
-                    b.ToTable("Comments");
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.FavoriteArticle", b =>
                 {
-                    b.Property<string>("ReaderId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("FavoriteArticleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ArticleId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("FavoriteArticleId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ReaderId1")
+                    b.Property<string>("ReaderId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("WriterId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ReaderId", "ArticleId");
+                    b.HasKey("FavoriteArticleId");
 
                     b.HasIndex("ArticleId");
 
-                    b.HasIndex("ReaderId1");
+                    b.HasIndex("ReaderId");
 
-                    b.HasIndex("WriterId");
-
-                    b.ToTable("FavoriteArticles");
+                    b.ToTable("FavoriteArticle");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.FavoriteGenre", b =>
@@ -325,7 +374,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("ReaderId");
 
-                    b.ToTable("FavoriteGenres");
+                    b.ToTable("FavoriteGenre");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.FollowedWriter", b =>
@@ -348,7 +397,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("WriterId");
 
-                    b.ToTable("FollowedWriters");
+                    b.ToTable("FollowedWriter");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Genre", b =>
@@ -362,7 +411,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("GenreId");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genre");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Keyword", b =>
@@ -376,7 +425,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("KeywordId");
 
-                    b.ToTable("Keywords");
+                    b.ToTable("Keyword");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Language", b =>
@@ -393,7 +442,135 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("LanguageId");
 
-                    b.ToTable("Languages");
+                    b.ToTable("Language");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("ArticleGenre", b =>
@@ -456,19 +633,11 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DatabaseLayer.Models.Genre", null)
-                        .WithMany("FavoriteGenres")
-                        .HasForeignKey("GenreId");
-
                     b.HasOne("DatabaseLayer.IdentityModels.Reader", "Reader")
                         .WithMany("Comments")
                         .HasForeignKey("ReaderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DatabaseLayer.IdentityModels.Reader", null)
-                        .WithMany("FavoriteGenres")
-                        .HasForeignKey("ReaderId1");
 
                     b.Navigation("Article");
 
@@ -489,14 +658,6 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DatabaseLayer.IdentityModels.Reader", null)
-                        .WithMany("FollowedWriters")
-                        .HasForeignKey("ReaderId1");
-
-                    b.HasOne("DatabaseLayer.IdentityModels.Writer", null)
-                        .WithMany("FollowedWriters")
-                        .HasForeignKey("WriterId");
-
                     b.Navigation("Article");
 
                     b.Navigation("Reader");
@@ -505,13 +666,13 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DatabaseLayer.Models.FavoriteGenre", b =>
                 {
                     b.HasOne("DatabaseLayer.Models.Genre", "Genre")
-                        .WithMany()
+                        .WithMany("FavoriteGenres")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DatabaseLayer.IdentityModels.Reader", "Reader")
-                        .WithMany()
+                        .WithMany("FavoriteGenres")
                         .HasForeignKey("ReaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -524,13 +685,13 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DatabaseLayer.Models.FollowedWriter", b =>
                 {
                     b.HasOne("DatabaseLayer.IdentityModels.Reader", "Reader")
-                        .WithMany()
+                        .WithMany("FollowedWriters")
                         .HasForeignKey("ReaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DatabaseLayer.IdentityModels.Writer", "Writer")
-                        .WithMany()
+                        .WithMany("FollowedWriters")
                         .HasForeignKey("WriterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -538,6 +699,57 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Reader");
 
                     b.Navigation("Writer");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("DatabaseLayer.IdentityModels.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("DatabaseLayer.IdentityModels.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DatabaseLayer.IdentityModels.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("DatabaseLayer.IdentityModels.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DatabaseLayer.IdentityModels.Reader", b =>

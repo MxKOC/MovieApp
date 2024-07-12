@@ -12,3 +12,4 @@ C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\ref\DatabaseL
 C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\bin\Debug\net7.0\DatabaseLayer.runtimeconfig.json
 C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.csproj.AssemblyReference.cache
 C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.genruntimeconfig.cache
+C:\Users\Mkoc\source\repos\MovieApp\DatabaseLayer\obj\Debug\net7.0\DatabaseLayer.sourcelink.json
