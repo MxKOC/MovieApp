@@ -1,0 +1,27 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MovieApp.DTOs.ArticleDto
+{
+    public class WriterDto
+    {
+        public string WriterId { get; set; }
+
+        [Required]
+        public string Username { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        public string Country { get; set; }
+        public DateTime Birthday { get; set; }
+        public DateTime JoinTime { get; set; }
+        public string Rate { get; set; }
+        public string WebPage { get; set; }
+
+    }
+}

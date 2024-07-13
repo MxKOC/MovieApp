@@ -5,7 +5,7 @@ namespace DatabaseLayer.Models;
 
 public class Language
 {
-    public int LanguageId { get; set; }
+    public string LanguageId { get; set; }
 
 
     public string? LanguageCode { get; set; }

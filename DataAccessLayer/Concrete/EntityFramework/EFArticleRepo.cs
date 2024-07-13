@@ -1,4 +1,6 @@
-﻿using DataAccessLayer.Context;
+﻿using DataAccessLayer.Abstract;
+using DataAccessLayer.Context;
+using DataAccessLayer.Repository;
 using DatabaseLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Abstract
+namespace DataAccessLayer.Concrete.EntityFramework
+
 {
     public class EFArticleRepo : GenericRepo<Article>, IArticleDal
     {
@@ -16,7 +19,7 @@ namespace DataAccessLayer.Abstract
 
 
 
-        public async Task UpdateAuthorAndFeeAsync(int articleId, string newAuthor, int additionalFee)
+        public async Task UpdateAuthorAndFeeAsync(string articleId, string newAuthor)
         {
             var article = await GetByIdAsync(articleId);
             if (article != null)

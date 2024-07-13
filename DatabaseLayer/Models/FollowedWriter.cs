@@ -8,7 +8,7 @@ namespace DatabaseLayer.Models
 {
     public class FollowedWriter
     {
-        public int FollowedWriterId { get; set; }
+        public string FollowedWriterId { get; set; }
         public string ReaderId { get; set; }
         public Reader Reader { get; set; }
 

@@ -8,11 +8,11 @@ namespace DatabaseLayer.Models
 {
 public class FavoriteGenre
 {
-    public int FavoriteGenreId { get; set; }
+    public string FavoriteGenreId { get; set; }
     public string ReaderId { get; set; }
     public Reader Reader { get; set; }
 
-    public int GenreId { get; set; }
+    public string GenreId { get; set; }
     public Genre Genre { get; set; }
 }
 }

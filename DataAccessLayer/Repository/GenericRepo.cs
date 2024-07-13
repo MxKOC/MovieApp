@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccessLayer.Abstract
+namespace DataAccessLayer.Repository
 {
     public class GenericRepo<T> : IGenericDal<T> where T : class
 {
@@ -25,7 +26,7 @@ namespace DataAccessLayer.Abstract
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(string id)
     {
         var entity = await _dbSet.FindAsync(id);
         if (entity != null)
@@ -40,7 +41,7 @@ namespace DataAccessLayer.Abstract
         return await _dbSet.ToListAsync();
     }
 
-    public async Task<T> GetByIdAsync(int id)
+    public async Task<T> GetByIdAsync(string id)
     {
         return await _dbSet.FindAsync(id);
     }

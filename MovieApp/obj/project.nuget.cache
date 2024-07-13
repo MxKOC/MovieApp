@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Q0c91jOrYMHZKmskWsWdX9pt94zy5iiUWhPvH4wcvwtefWZD8j74e6bP6aK6QEkbUOEmyqhXvHbTaHMiPzrMYA==",
+  "dgSpecHash": "UIMJBSeIh0AzNUKKGIBryRDMWAjq+23Ni4m6lyfSNkG8cGNg1Nol34rU2DYk8Pqa3Aw9+YUdaGlgnbaCkPTVYA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mkoc\\source\\repos\\MovieApp\\MovieApp\\MovieApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Mkoc\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",

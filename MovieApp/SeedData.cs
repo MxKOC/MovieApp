@@ -14,7 +14,7 @@ namespace MovieApp
     {
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        string[] roleNames = { "Admin", "Viewer", "User" };
+        string[] roleNames = { "Admin","Writer", "Reader", "User" };
         IdentityResult roleResult;
 
         foreach (var roleName in roleNames)
@@ -26,25 +26,36 @@ namespace MovieApp
             }
         }
 
-        // Admin kullanıcıyı oluşturma
         var poweruser = new User
-        {
-            UserName = "admin@admin.com",
-            Email = "admin@admin.com",
-        };
-
-        string userPWD = "Admin@123";
-        var _user = await userManager.FindByEmailAsync("admin@admin.com");
-
-        if (_user == null)
-        {
-            var createPowerUser = await userManager.CreateAsync(poweruser, userPWD);
-            if (createPowerUser.Succeeded)
             {
-                await userManager.AddToRoleAsync(poweruser, "Admin");
+                UserName = "admin@admin.com",
+                Email = "admin@admin.com",
+                Name = "Admin User" // Ensure Name is not null
+            };
+
+            string userPWD = "Admin@123";
+            var _user = await userManager.FindByEmailAsync("admin@admin.com");
+
+            if (_user == null)
+            {
+                var createPowerUser = await userManager.CreateAsync(poweruser, userPWD);
+                if (createPowerUser.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(poweruser, "Admin");
+                }
+                else
+                {
+                    // Log errors if user creation fails
+                    foreach (var error in createPowerUser.Errors)
+                    {
+                        Console.WriteLine($"Error creating user: {error.Description}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Admin user already exists.");
             }
         }
     }
-    }
-
 }

@@ -1,9 +1,15 @@
+using BusinessLayer.Manager;
+using BusinessLayer.Services;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete.EntityFramework;
 using DataAccessLayer.Context;
+using DataAccessLayer.Repository;
 using DatabaseLayer.IdentityModels;
+using DatabaseLayer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieApp;
-
+using MovieApp.Mapper;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -28,6 +34,23 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     })
     .AddEntityFrameworkStores<IdentityContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped(typeof(IGenericDal<Article>), typeof(GenericRepo<Article>));
+builder.Services.AddScoped(typeof(IGenericDal<Genre>), typeof(GenericRepo<Genre>));
+builder.Services.AddScoped(typeof(IGenericDal<Reader>), typeof(GenericRepo<Reader>));
+builder.Services.AddScoped(typeof(IGenericDal<Writer>), typeof(GenericRepo<Writer>));
+
+builder.Services.AddScoped<IArticleDal, EFArticleRepo>();
+builder.Services.AddScoped<IGenreDal, EFGenreRepo>();
+builder.Services.AddScoped<IReaderDal, EFReaderRepo>();
+builder.Services.AddScoped<IWriterDal, EFWriterRepo>();
+
+builder.Services.AddScoped<IArticleServices, ArticleManager>();
+builder.Services.AddScoped<IGenreServices, GenreManager>();
+builder.Services.AddScoped<IReaderServices, ReaderManager>();
+builder.Services.AddScoped<IWriterServices, WriterManager>();
+
+builder.Services.AddAutoMapper(typeof(CustomMapperProfile));
 
 
 var app = builder.Build();

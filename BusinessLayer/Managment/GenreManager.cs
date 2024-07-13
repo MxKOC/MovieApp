@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using BusinessLayer.Services;
 using DatabaseLayer.Models;
 
-namespace BusinessLayer.Managment
+namespace BusinessLayer.Manager
 {
-    public class GenreManagment : IGenreServices
+    public class GenreManager : IGenreServices
     {
-        public Task<int> CreateGenreAsync(Genre genre)
+        public Task<string> CreateGenreAsync(Genre genre)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteGenreAsync(int genreId)
+        public Task<bool> DeleteGenreAsync(string genreId)
         {
             throw new NotImplementedException();
         }
@@ -24,12 +24,12 @@ namespace BusinessLayer.Managment
             throw new NotImplementedException();
         }
 
-        public Task<Genre> GetGenreByIdAsync(int genreId)
+        public Task<Genre> GetGenreByIdAsync(string genreId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateGenreAsync(int genreId, Genre genre)
+        public Task<bool> UpdateGenreAsync(string genreId, Genre genre)
         {
             throw new NotImplementedException();
         }
