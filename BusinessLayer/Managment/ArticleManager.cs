@@ -20,8 +20,9 @@ namespace BusinessLayer.Manager
 
     public async Task<string> CreateArticleAsync(Article article)
     {
-        await _articleDal.AddAsync(article);
-        return article.ArticleId; // Assuming Id is set after addition
+        var addArticle = await _articleDal.AddAsync(article);
+
+        return addArticle.ArticleId; // Assuming Id is set after addition
     }
 
     public async Task<bool> DeleteArticleAsync(string articleId)
@@ -45,18 +46,21 @@ namespace BusinessLayer.Manager
         return _articleDal.GetByIdAsync(articleId);
     }
 
-    public async Task<bool> UpdateArticleAsync(string articleId, Article article)
+    public async Task<Article> UpdateArticleAsync(string articleId, Article article)
     {
         var existingArticle = await _articleDal.GetByIdAsync(articleId);
         if (existingArticle == null)
-            return false;
+    {
+        return null; // Makale bulunamazsa null döndür
+    }
 
         existingArticle.Title = article.Title;
-        existingArticle.ReleaseDate = article.ReleaseDate;
+        existingArticle.WordNumber = article.WordNumber;
 
 
         await _articleDal.UpdateAsync(existingArticle);
-        return true;
+
+        return existingArticle;
     }
 }
 

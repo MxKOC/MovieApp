@@ -45,18 +45,17 @@ namespace BusinessLayer.Manager
         return _writerDal.GetByIdAsync(writerId);
     }
 
-    public async Task<bool> UpdateWriterAsync(string writerId, Writer writer)
+    public async Task<Writer> UpdateWriterAsync(string writerId, Writer writer)
     {
         var existingWriter = await _writerDal.GetByIdAsync(writerId);
         if (existingWriter == null)
-            return false;
+            return null;
 
         existingWriter.UserName = writer.UserName;
-        existingWriter.Email = writer.Email;
 
 
         await _writerDal.UpdateAsync(existingWriter);
-        return true;
+        return existingWriter;
     }
 }
 

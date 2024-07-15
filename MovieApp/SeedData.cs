@@ -10,7 +10,7 @@ namespace MovieApp
 {
    public class SeedData
     {
-        public static async Task Initialize(IServiceProvider serviceProvider, UserManager<User> userManager)
+        public static async Task Initialize(IServiceProvider serviceProvider, UserManager<IdentityUser> userManager)
     {
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -26,11 +26,10 @@ namespace MovieApp
             }
         }
 
-        var poweruser = new User
+        var poweruser = new IdentityUser
             {
                 UserName = "admin@admin.com",
                 Email = "admin@admin.com",
-                Name = "Admin User" // Ensure Name is not null
             };
 
             string userPWD = "Admin@123";

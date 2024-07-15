@@ -12,7 +12,7 @@ namespace BusinessLayer.Services
         Task<List<Writer>> GetAllWritersAsync();  // Tüm türleri getirme
         Task<Writer> GetWriterByIdAsync(string writerId);  // Belirli bir türü id'ye göre getirme
         Task<string> CreateWriterAsync(Writer writer);  // Yeni bir tür oluşturma
-        Task<bool> UpdateWriterAsync(string writerId, Writer writer);  // Bir türü güncelleme
+        Task<Writer> UpdateWriterAsync(string writerId, Writer writer);  // Bir türü güncelleme
         Task<bool> DeleteWriterAsync(string writerId);  // Bir türü silme
     }
 }

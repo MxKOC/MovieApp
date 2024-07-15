@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DataAccessLayer.Migrations
+namespace DataAccessLayer.Migrations.Identity
 {
     /// <inheritdoc />
-    public partial class fluent : Migration
+    public partial class removeuser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,8 +30,13 @@ namespace DataAccessLayer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    MyProperty = table.Column<int>(type: "INTEGER", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
+                    MyProperty = table.Column<int>(type: "INTEGER", nullable: true),
+                    Reader_JoinTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Birthday = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    JoinTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Rate = table.Column<int>(type: "INTEGER", nullable: true),
+                    WebPage = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -56,8 +61,7 @@ namespace DataAccessLayer.Migrations
                 name: "Genre",
                 columns: table => new
                 {
-                    GenreId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    GenreId = table.Column<string>(type: "TEXT", nullable: false),
                     GenreName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -69,8 +73,7 @@ namespace DataAccessLayer.Migrations
                 name: "Keyword",
                 columns: table => new
                 {
-                    KeywordId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    KeywordId = table.Column<string>(type: "TEXT", nullable: false),
                     KeywordName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -82,71 +85,13 @@ namespace DataAccessLayer.Migrations
                 name: "Language",
                 columns: table => new
                 {
-                    LanguageId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    LanguageId = table.Column<string>(type: "TEXT", nullable: false),
                     LanguageCode = table.Column<string>(type: "TEXT", nullable: true),
                     LanguageName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Language", x => x.LanguageId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Readers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    MyProperty = table.Column<int>(type: "INTEGER", nullable: false),
-                    JoinTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "TEXT", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Readers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Writers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Country = table.Column<string>(type: "TEXT", nullable: false),
-                    Birthday = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    JoinTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Rate = table.Column<string>(type: "TEXT", nullable: false),
-                    WebPage = table.Column<string>(type: "TEXT", nullable: false),
-                    UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "TEXT", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Writers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,6 +113,33 @@ namespace DataAccessLayer.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Article",
+                columns: table => new
+                {
+                    ArticleId = table.Column<string>(type: "TEXT", nullable: false),
+                    IsPublic = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
+                    Body = table.Column<string>(type: "TEXT", nullable: true),
+                    Overview = table.Column<string>(type: "TEXT", nullable: true),
+                    Popularity = table.Column<double>(type: "REAL", nullable: true),
+                    ReleaseDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Revenue = table.Column<int>(type: "INTEGER", nullable: false),
+                    WordNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    VoteAverage = table.Column<double>(type: "REAL", nullable: true),
+                    VoteCount = table.Column<int>(type: "INTEGER", nullable: true),
+                    WriterId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Article", x => x.ArticleId);
+                    table.ForeignKey(
+                        name: "FK_Article_AspNetUsers_WriterId",
+                        column: x => x.WriterId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -256,65 +228,10 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FavoriteGenre",
-                columns: table => new
-                {
-                    FavoriteGenreId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ReaderId = table.Column<string>(type: "TEXT", nullable: false),
-                    GenreId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FavoriteGenre", x => x.FavoriteGenreId);
-                    table.ForeignKey(
-                        name: "FK_FavoriteGenre_Genre_GenreId",
-                        column: x => x.GenreId,
-                        principalTable: "Genre",
-                        principalColumn: "GenreId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_FavoriteGenre_Readers_ReaderId",
-                        column: x => x.ReaderId,
-                        principalTable: "Readers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Article",
-                columns: table => new
-                {
-                    ArticleId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    IsPublic = table.Column<bool>(type: "INTEGER", nullable: true),
-                    Title = table.Column<string>(type: "TEXT", nullable: true),
-                    Body = table.Column<string>(type: "TEXT", nullable: true),
-                    Overview = table.Column<string>(type: "TEXT", nullable: true),
-                    Popularity = table.Column<double>(type: "REAL", nullable: true),
-                    ReleaseDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Revenue = table.Column<int>(type: "INTEGER", nullable: false),
-                    WordNumber = table.Column<int>(type: "INTEGER", nullable: false),
-                    VoteAverage = table.Column<double>(type: "REAL", nullable: true),
-                    VoteCount = table.Column<int>(type: "INTEGER", nullable: true),
-                    WriterId = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Article", x => x.ArticleId);
-                    table.ForeignKey(
-                        name: "FK_Article_Writers_WriterId",
-                        column: x => x.WriterId,
-                        principalTable: "Writers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "FollowedWriter",
                 columns: table => new
                 {
-                    FollowedWriterId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    FollowedWriterId = table.Column<string>(type: "TEXT", nullable: false),
                     ReaderId = table.Column<string>(type: "TEXT", nullable: false),
                     WriterId = table.Column<string>(type: "TEXT", nullable: false)
                 },
@@ -322,16 +239,41 @@ namespace DataAccessLayer.Migrations
                 {
                     table.PrimaryKey("PK_FollowedWriter", x => x.FollowedWriterId);
                     table.ForeignKey(
-                        name: "FK_FollowedWriter_Readers_ReaderId",
+                        name: "FK_FollowedWriter_AspNetUsers_ReaderId",
                         column: x => x.ReaderId,
-                        principalTable: "Readers",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FollowedWriter_Writers_WriterId",
+                        name: "FK_FollowedWriter_AspNetUsers_WriterId",
                         column: x => x.WriterId,
-                        principalTable: "Writers",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FavoriteGenre",
+                columns: table => new
+                {
+                    FavoriteGenreId = table.Column<string>(type: "TEXT", nullable: false),
+                    ReaderId = table.Column<string>(type: "TEXT", nullable: false),
+                    GenreId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FavoriteGenre", x => x.FavoriteGenreId);
+                    table.ForeignKey(
+                        name: "FK_FavoriteGenre_AspNetUsers_ReaderId",
+                        column: x => x.ReaderId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FavoriteGenre_Genre_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genre",
+                        principalColumn: "GenreId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -339,8 +281,8 @@ namespace DataAccessLayer.Migrations
                 name: "ArticleGenre",
                 columns: table => new
                 {
-                    ArticlesArticleId = table.Column<int>(type: "INTEGER", nullable: false),
-                    GenresGenreId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticlesArticleId = table.Column<string>(type: "TEXT", nullable: false),
+                    GenresGenreId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -363,8 +305,8 @@ namespace DataAccessLayer.Migrations
                 name: "ArticleKeyword",
                 columns: table => new
                 {
-                    ArticlesArticleId = table.Column<int>(type: "INTEGER", nullable: false),
-                    KeywordsKeywordId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticlesArticleId = table.Column<string>(type: "TEXT", nullable: false),
+                    KeywordsKeywordId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -387,8 +329,8 @@ namespace DataAccessLayer.Migrations
                 name: "ArticleLanguage",
                 columns: table => new
                 {
-                    ArticlesArticleId = table.Column<int>(type: "INTEGER", nullable: false),
-                    LanguagesLanguageId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticlesArticleId = table.Column<string>(type: "TEXT", nullable: false),
+                    LanguagesLanguageId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -411,11 +353,10 @@ namespace DataAccessLayer.Migrations
                 name: "Comment",
                 columns: table => new
                 {
-                    CommentId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    CommentId = table.Column<string>(type: "TEXT", nullable: false),
                     Content = table.Column<string>(type: "TEXT", nullable: false),
                     ReaderId = table.Column<string>(type: "TEXT", nullable: false),
-                    ArticleId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticleId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -427,9 +368,9 @@ namespace DataAccessLayer.Migrations
                         principalColumn: "ArticleId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Comment_Readers_ReaderId",
+                        name: "FK_Comment_AspNetUsers_ReaderId",
                         column: x => x.ReaderId,
-                        principalTable: "Readers",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -438,10 +379,9 @@ namespace DataAccessLayer.Migrations
                 name: "FavoriteArticle",
                 columns: table => new
                 {
-                    FavoriteArticleId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    FavoriteArticleId = table.Column<string>(type: "TEXT", nullable: false),
                     ReaderId = table.Column<string>(type: "TEXT", nullable: false),
-                    ArticleId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticleId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -453,9 +393,9 @@ namespace DataAccessLayer.Migrations
                         principalColumn: "ArticleId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FavoriteArticle_Readers_ReaderId",
+                        name: "FK_FavoriteArticle_AspNetUsers_ReaderId",
                         column: x => x.ReaderId,
-                        principalTable: "Readers",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -607,19 +547,13 @@ namespace DataAccessLayer.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Article");
 
             migrationBuilder.DropTable(
                 name: "Genre");
 
             migrationBuilder.DropTable(
-                name: "Readers");
-
-            migrationBuilder.DropTable(
-                name: "Writers");
+                name: "AspNetUsers");
         }
     }
 }

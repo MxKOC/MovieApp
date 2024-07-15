@@ -19,7 +19,7 @@ namespace MovieApp.DTOs.ArticleDto
         public int WordNumber { get; set; }
         public double? VoteAverage { get; set; }
         public int? VoteCount { get; set; }
-        public int WriterId { get; set; }
+        public string WriterId { get; set; }
 
     }
 }

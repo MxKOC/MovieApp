@@ -70,20 +70,17 @@ namespace MovieApp.Controllers
 
             var writer = _mapper.Map<Writer>(writerDto);
 
-            if (id != writer.Id)
-            {
-                return BadRequest("Writer ID mismatch");
-            }
+
 
             var result = await _writerServices.UpdateWriterAsync(id, writer);
-            if (!result)
+            if (result==null)
             {
                 return NotFound();
             }
 
             var updatedWriter = await _writerServices.GetWriterByIdAsync(id);
-            var updatedWriterDto = _mapper.Map<WriterDto>(updatedWriter);
-            return Ok(updatedWriterDto);
+            var EntityDto = _mapper.Map<WriterDto>(updatedWriter);
+            return CreatedAtAction(nameof(GetWriterById), new { id = EntityDto.Id }, EntityDto);
         }
 
         [HttpDelete("{id}")]

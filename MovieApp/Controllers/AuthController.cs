@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer.Services;
 using DatabaseLayer.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,55 +14,82 @@ namespace MovieApp.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<Reader> _userManager;
-        private readonly SignInManager<Reader> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IJwtService _jwtService;
 
-
-        public AuthController(UserManager<Reader> userManager, SignInManager<Reader> signInManager)
+        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IJwtService jwtService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _jwtService = jwtService;
+
         }
 
-
-
-        [HttpPost("register")]
-        public async Task<IActionResult> ReaderRegister(ReaderRegisterDto model)
+        [HttpPost("writerregister")]
+        public async Task<IActionResult> WriterRegister(WriterRegisterDto model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var user = new Writer { UserName = model.UserName };
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
             {
-                var user = new Reader { UserName = model.UserName, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
+                var createdUser = await _userManager.FindByNameAsync(user.UserName);
+                if (createdUser == null)
                 {
-                    await _userManager.AddToRoleAsync(user, "Reader"); // Reader rolü ataması
-                    return Ok("User created successfully");
+                    return StatusCode(500, "User creation failed");
                 }
 
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+
+                var token = _jwtService.GenerateTokenWriter(user);
+                await _userManager.AddToRoleAsync(user, "Writer"); // Reader rolü ataması
+
+                return Ok(new { token });
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
             }
 
             return BadRequest(ModelState);
         }
 
 
-        [HttpPost("login")]
+        [HttpPost("readerregister")]
+        public async Task<IActionResult> ReaderRegister(ReaderRegisterDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new Reader { UserName = model.UserName };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Reader"); // Reader rolü ataması
+                    var token = _jwtService.GenerateTokenReader(user);
+                    return Ok(new { Token = token });
+                }
+
+                return BadRequest("asd");
+            }
+            return BadRequest("Model ");
+
+        }
+
+
+        /*[HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto model)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var user = await _userManager.FindByEmailAsync(model.UserName);
+            if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
+                return Unauthorized(new { message = "Email or password is incorrect." });
 
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
-            {
-                // Başarılı giriş durumunda işlemler buraya yazılabilir
-                return Ok("Login successful");
-            }
-
-            return Unauthorized();
-        }
+            var token = _jwtService.GenerateTokenWriter(user);
+            return Ok(new { Token = token });
+        }*/
 
     }
 }

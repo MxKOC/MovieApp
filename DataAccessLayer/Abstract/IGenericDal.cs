@@ -11,8 +11,10 @@ namespace DataAccessLayer.Abstract
 
             Task<T> GetByIdAsync(string id);
             Task<IEnumerable<T>> GetAllAsync();
-            Task AddAsync(T entity);
+            Task<T> AddAsync(T entity);
             Task UpdateAsync(T entity);
             Task DeleteAsync(string id);
+            public Task<IEnumerable<T>> GetByReaderIdAsync(string readerId);
+            public Task<IEnumerable<T>> GetByWriterIdAsync(string writerId);
         }
 }

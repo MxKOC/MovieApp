@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DataAccessLayer.Migrations.Articles
+namespace DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class fluent : Migration
+    public partial class removeuser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,8 +15,7 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "Genres",
                 columns: table => new
                 {
-                    GenreId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    GenreId = table.Column<string>(type: "TEXT", nullable: false),
                     GenreName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -28,8 +27,7 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "Keywords",
                 columns: table => new
                 {
-                    KeywordId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    KeywordId = table.Column<string>(type: "TEXT", nullable: false),
                     KeywordName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -41,8 +39,7 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "Languages",
                 columns: table => new
                 {
-                    LanguageId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    LanguageId = table.Column<string>(type: "TEXT", nullable: false),
                     LanguageCode = table.Column<string>(type: "TEXT", nullable: true),
                     LanguageName = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -83,10 +80,9 @@ namespace DataAccessLayer.Migrations.Articles
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Country = table.Column<string>(type: "TEXT", nullable: false),
                     Birthday = table.Column<DateTime>(type: "TEXT", nullable: false),
                     JoinTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Rate = table.Column<string>(type: "TEXT", nullable: false),
+                    Rate = table.Column<int>(type: "INTEGER", nullable: false),
                     WebPage = table.Column<string>(type: "TEXT", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", nullable: true),
@@ -112,10 +108,9 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "FavoriteGenres",
                 columns: table => new
                 {
-                    FavoriteGenreId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    FavoriteGenreId = table.Column<string>(type: "TEXT", nullable: false),
                     ReaderId = table.Column<string>(type: "TEXT", nullable: false),
-                    GenreId = table.Column<int>(type: "INTEGER", nullable: false)
+                    GenreId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,8 +133,7 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "Articles",
                 columns: table => new
                 {
-                    ArticleId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    ArticleId = table.Column<string>(type: "TEXT", nullable: false),
                     IsPublic = table.Column<bool>(type: "INTEGER", nullable: true),
                     Title = table.Column<string>(type: "TEXT", nullable: true),
                     Body = table.Column<string>(type: "TEXT", nullable: true),
@@ -166,8 +160,7 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "FollowedWriters",
                 columns: table => new
                 {
-                    FollowedWriterId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    FollowedWriterId = table.Column<string>(type: "TEXT", nullable: false),
                     ReaderId = table.Column<string>(type: "TEXT", nullable: false),
                     WriterId = table.Column<string>(type: "TEXT", nullable: false)
                 },
@@ -192,8 +185,8 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "ArticleGenre",
                 columns: table => new
                 {
-                    ArticlesArticleId = table.Column<int>(type: "INTEGER", nullable: false),
-                    GenresGenreId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticlesArticleId = table.Column<string>(type: "TEXT", nullable: false),
+                    GenresGenreId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,8 +209,8 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "ArticleKeyword",
                 columns: table => new
                 {
-                    ArticlesArticleId = table.Column<int>(type: "INTEGER", nullable: false),
-                    KeywordsKeywordId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticlesArticleId = table.Column<string>(type: "TEXT", nullable: false),
+                    KeywordsKeywordId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -240,8 +233,8 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "ArticleLanguage",
                 columns: table => new
                 {
-                    ArticlesArticleId = table.Column<int>(type: "INTEGER", nullable: false),
-                    LanguagesLanguageId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticlesArticleId = table.Column<string>(type: "TEXT", nullable: false),
+                    LanguagesLanguageId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -264,11 +257,10 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "Comments",
                 columns: table => new
                 {
-                    CommentId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    CommentId = table.Column<string>(type: "TEXT", nullable: false),
                     Content = table.Column<string>(type: "TEXT", nullable: false),
                     ReaderId = table.Column<string>(type: "TEXT", nullable: false),
-                    ArticleId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticleId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -291,10 +283,9 @@ namespace DataAccessLayer.Migrations.Articles
                 name: "FavoriteArticles",
                 columns: table => new
                 {
-                    FavoriteArticleId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    FavoriteArticleId = table.Column<string>(type: "TEXT", nullable: false),
                     ReaderId = table.Column<string>(type: "TEXT", nullable: false),
-                    ArticleId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ArticleId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

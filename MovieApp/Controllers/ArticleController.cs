@@ -63,23 +63,20 @@ namespace MovieApp.Controllers
         }
 
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<ArticleDto>> UpdateArticle([FromRoute] string id, ArticleCreateDto articleDto)
+        [HttpPut("{Id}")]
+        public async Task<ActionResult<ArticleDto>> UpdateArticle([FromRoute] string Id, [FromBody] ArticleCreateDto articleDto)
         {
 
             var DomainArticle = _mapper.Map<Article>(articleDto);
 
-            if (id != DomainArticle.ArticleId)
-            {
-                return BadRequest("Article ID mismatch");
-            }
 
-            var result = await _articleServices.UpdateArticleAsync(id, DomainArticle);
-            if (!result)
+
+            var updatedArticle = await _articleServices.UpdateArticleAsync(Id, DomainArticle);
+            if (updatedArticle == null)
             {
                 return NotFound();
             }
-            var EntityDto = _mapper.Map<ArticleDto>(DomainArticle);
+            var EntityDto = _mapper.Map<ArticleDto>(updatedArticle);
 
             return CreatedAtAction(nameof(GetArticleById), new { id = EntityDto.ArticleId }, EntityDto);
 

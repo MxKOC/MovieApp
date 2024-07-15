@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "olLhP76iCcoIfG2ynYc8hbpxlR0fJwIK8nS3osVEqRKIbRD3ydpdmZRrICVm/DkdYyc3L6CXOv5d5Q7McBJOJQ==",
+  "dgSpecHash": "00GntLzhdaFpoH3AzUYl7xi7I+KvbhvZP5cxw9Fm0uX3xpDmfUtG3TPL5MPhttla5QWO4RRLL8xes/hC6MYMaQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mkoc\\source\\repos\\MovieApp\\DatabaseLayer\\DatabaseLayer.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.10\\microsoft.aspnetcore.cryptography.internal.7.0.10.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.10\\microsoft.aspnetcore.cryptography.keyderivation.7.0.10.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\7.0.10\\microsoft.aspnetcore.identity.entityframeworkcore.7.0.10.nupkg.sha512",
+    "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\7.0.10\\microsoft.aspnetcore.identity.ui.7.0.10.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.10\\microsoft.data.sqlite.core.7.0.10.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.10\\microsoft.entityframeworkcore.7.0.10.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.10\\microsoft.entityframeworkcore.abstractions.7.0.10.nupkg.sha512",
@@ -23,6 +24,8 @@
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.extensions.dependencymodel\\7.0.0\\microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
+    "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\7.0.0\\microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\7.0.10\\microsoft.extensions.fileproviders.embedded.7.0.10.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.extensions.identity.core\\7.0.10\\microsoft.extensions.identity.core.7.0.10.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.extensions.identity.stores\\7.0.10\\microsoft.extensions.identity.stores.7.0.10.nupkg.sha512",
     "C:\\Users\\Mkoc\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",

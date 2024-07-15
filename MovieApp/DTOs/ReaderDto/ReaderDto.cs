@@ -8,7 +8,7 @@ namespace MovieApp.DTOs.ArticleDto
 {
     public class ReaderDto
     {
-        public string ReaderId { get; set; }
+        public string Id { get; set; }
 
 
         [Required]

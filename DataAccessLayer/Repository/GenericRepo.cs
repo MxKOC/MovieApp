@@ -20,10 +20,11 @@ namespace DataAccessLayer.Repository
         _dbSet = _context.Set<T>();
     }
 
-    public async Task AddAsync(T entity)
+    public async Task<T> AddAsync(T entity)
     {
         await _dbSet.AddAsync(entity);
         await _context.SaveChangesAsync();
+        return entity;
     }
 
     public async Task DeleteAsync(string id)
@@ -52,6 +53,29 @@ namespace DataAccessLayer.Repository
         _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
+
+
+    public async Task<IEnumerable<T>> GetByReaderIdAsync(string readerId)
+    {
+        return await _dbSet
+            .Where(e => EF.Property<string>(e, "ReaderId") == readerId)
+            .ToListAsync();
+    }
+
+
+
+        public async Task<IEnumerable<T>> GetByWriterIdAsync(string writerId)
+    {
+        return await _dbSet
+            .Where(e => EF.Property<string>(e, "WriterId") == writerId)
+            .ToListAsync();
+    }
+
+
+
+
+
+
 }
 
 }

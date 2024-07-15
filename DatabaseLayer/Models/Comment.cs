@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using DatabaseLayer.IdentityModels;
@@ -7,7 +8,8 @@ using DatabaseLayer.IdentityModels;
 namespace DatabaseLayer.Models
 {
     public class Comment
-    {
+    {   
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string CommentId { get; set; }
         public string Content { get; set; }
 

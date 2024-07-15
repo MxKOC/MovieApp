@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DataAccessLayer.Migrations.Articles
+namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ArticlesContext))]
-    [Migration("20240712082429_fluent")]
-    partial class fluent
+    [Migration("20240714085833_userprop")]
+    partial class userprop
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,11 +22,11 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("ArticleGenre", b =>
                 {
-                    b.Property<int>("ArticlesArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticlesArticleId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("GenresGenreId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("GenresGenreId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ArticlesArticleId", "GenresGenreId");
 
@@ -37,11 +37,11 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("ArticleKeyword", b =>
                 {
-                    b.Property<int>("ArticlesArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticlesArticleId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("KeywordsKeywordId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("KeywordsKeywordId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ArticlesArticleId", "KeywordsKeywordId");
 
@@ -52,11 +52,11 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("ArticleLanguage", b =>
                 {
-                    b.Property<int>("ArticlesArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticlesArticleId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("LanguagesLanguageId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("LanguagesLanguageId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ArticlesArticleId", "LanguagesLanguageId");
 
@@ -131,14 +131,10 @@ namespace DataAccessLayer.Migrations.Articles
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Birthday")
+                    b.Property<DateTime?>("Birthday")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -147,7 +143,7 @@ namespace DataAccessLayer.Migrations.Articles
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("JoinTime")
+                    b.Property<DateTime?>("JoinTime")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
@@ -171,9 +167,8 @@ namespace DataAccessLayer.Migrations.Articles
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Rate")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("Rate")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
@@ -185,7 +180,6 @@ namespace DataAccessLayer.Migrations.Articles
                         .HasColumnType("TEXT");
 
                     b.Property<string>("WebPage")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -195,9 +189,8 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("DatabaseLayer.Models.Article", b =>
                 {
-                    b.Property<int>("ArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticleId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Body")
                         .HasColumnType("TEXT");
@@ -241,12 +234,12 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("DatabaseLayer.Models.Comment", b =>
                 {
-                    b.Property<int>("CommentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("CommentId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticleId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -267,12 +260,12 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("DatabaseLayer.Models.FavoriteArticle", b =>
                 {
-                    b.Property<int>("FavoriteArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("FavoriteArticleId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticleId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ReaderId")
                         .IsRequired()
@@ -289,12 +282,12 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("DatabaseLayer.Models.FavoriteGenre", b =>
                 {
-                    b.Property<int>("FavoriteGenreId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("FavoriteGenreId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("GenreId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("GenreId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ReaderId")
                         .IsRequired()
@@ -311,9 +304,8 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("DatabaseLayer.Models.FollowedWriter", b =>
                 {
-                    b.Property<int>("FollowedWriterId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("FollowedWriterId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ReaderId")
                         .IsRequired()
@@ -334,9 +326,8 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("DatabaseLayer.Models.Genre", b =>
                 {
-                    b.Property<int>("GenreId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("GenreId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("GenreName")
                         .HasColumnType("TEXT");
@@ -348,9 +339,8 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("DatabaseLayer.Models.Keyword", b =>
                 {
-                    b.Property<int>("KeywordId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("KeywordId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("KeywordName")
                         .HasColumnType("TEXT");
@@ -362,9 +352,8 @@ namespace DataAccessLayer.Migrations.Articles
 
             modelBuilder.Entity("DatabaseLayer.Models.Language", b =>
                 {
-                    b.Property<int>("LanguageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("LanguageId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("LanguageCode")
                         .HasColumnType("TEXT");

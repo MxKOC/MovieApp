@@ -3,27 +3,30 @@ using System;
 using DataAccessLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DataAccessLayer.Migrations
+namespace DataAccessLayer.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    partial class IdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20240714085926_userprop")]
+    partial class userprop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
 
             modelBuilder.Entity("ArticleGenre", b =>
                 {
-                    b.Property<int>("ArticlesArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticlesArticleId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("GenresGenreId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("GenresGenreId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ArticlesArticleId", "GenresGenreId");
 
@@ -34,11 +37,11 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("ArticleKeyword", b =>
                 {
-                    b.Property<int>("ArticlesArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticlesArticleId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("KeywordsKeywordId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("KeywordsKeywordId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ArticlesArticleId", "KeywordsKeywordId");
 
@@ -49,11 +52,11 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("ArticleLanguage", b =>
                 {
-                    b.Property<int>("ArticlesArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticlesArticleId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("LanguagesLanguageId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("LanguagesLanguageId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ArticlesArticleId", "LanguagesLanguageId");
 
@@ -62,210 +65,10 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("ArticleLanguage");
                 });
 
-            modelBuilder.Entity("DatabaseLayer.IdentityModels.Reader", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("JoinTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Readers");
-                });
-
-            modelBuilder.Entity("DatabaseLayer.IdentityModels.User", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("DatabaseLayer.IdentityModels.Writer", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("JoinTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Rate")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("WebPage")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Writers");
-                });
-
             modelBuilder.Entity("DatabaseLayer.Models.Article", b =>
                 {
-                    b.Property<int>("ArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticleId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Body")
                         .HasColumnType("TEXT");
@@ -309,12 +112,12 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.Comment", b =>
                 {
-                    b.Property<int>("CommentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("CommentId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticleId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -335,12 +138,12 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.FavoriteArticle", b =>
                 {
-                    b.Property<int>("FavoriteArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("FavoriteArticleId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ArticleId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ReaderId")
                         .IsRequired()
@@ -357,12 +160,12 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.FavoriteGenre", b =>
                 {
-                    b.Property<int>("FavoriteGenreId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("FavoriteGenreId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("GenreId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("GenreId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ReaderId")
                         .IsRequired()
@@ -379,9 +182,8 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.FollowedWriter", b =>
                 {
-                    b.Property<int>("FollowedWriterId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("FollowedWriterId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ReaderId")
                         .IsRequired()
@@ -402,9 +204,8 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.Genre", b =>
                 {
-                    b.Property<int>("GenreId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("GenreId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("GenreName")
                         .HasColumnType("TEXT");
@@ -416,9 +217,8 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.Keyword", b =>
                 {
-                    b.Property<int>("KeywordId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("KeywordId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("KeywordName")
                         .HasColumnType("TEXT");
@@ -430,9 +230,8 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.Language", b =>
                 {
-                    b.Property<int>("LanguageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("LanguageId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("LanguageCode")
                         .HasColumnType("TEXT");
@@ -492,6 +291,78 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -571,6 +442,44 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("DatabaseLayer.IdentityModels.Reader", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<DateTime>("JoinTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MyProperty")
+                        .HasColumnType("INTEGER");
+
+                    b.ToTable("AspNetUsers", t =>
+                        {
+                            t.Property("JoinTime")
+                                .HasColumnName("Reader_JoinTime");
+                        });
+
+                    b.HasDiscriminator().HasValue("Reader");
+                });
+
+            modelBuilder.Entity("DatabaseLayer.IdentityModels.Writer", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("JoinTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Rate")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("WebPage")
+                        .HasColumnType("TEXT");
+
+                    b.HasDiscriminator().HasValue("Writer");
                 });
 
             modelBuilder.Entity("ArticleGenre", b =>
@@ -712,7 +621,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("DatabaseLayer.IdentityModels.User", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -721,7 +630,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("DatabaseLayer.IdentityModels.User", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -736,7 +645,7 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DatabaseLayer.IdentityModels.User", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -745,11 +654,23 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("DatabaseLayer.IdentityModels.User", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DatabaseLayer.Models.Article", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("FavoriteArticles");
+                });
+
+            modelBuilder.Entity("DatabaseLayer.Models.Genre", b =>
+                {
+                    b.Navigation("FavoriteGenres");
                 });
 
             modelBuilder.Entity("DatabaseLayer.IdentityModels.Reader", b =>
@@ -768,18 +689,6 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Articles");
 
                     b.Navigation("FollowedWriters");
-                });
-
-            modelBuilder.Entity("DatabaseLayer.Models.Article", b =>
-                {
-                    b.Navigation("Comments");
-
-                    b.Navigation("FavoriteArticles");
-                });
-
-            modelBuilder.Entity("DatabaseLayer.Models.Genre", b =>
-                {
-                    b.Navigation("FavoriteGenres");
                 });
 #pragma warning restore 612, 618
         }

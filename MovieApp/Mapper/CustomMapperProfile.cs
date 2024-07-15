@@ -3,6 +3,7 @@ using DatabaseLayer.IdentityModels;
 using DatabaseLayer.Models;
 using MovieApp.DTOs;
 using MovieApp.DTOs.ArticleDto;
+using MovieApp.DTOs.CommentDto;
 
 namespace MovieApp.Mapper
 {
@@ -16,6 +17,8 @@ namespace MovieApp.Mapper
             CreateMap<Reader, ReaderCreateDto>().ReverseMap();
             CreateMap<Writer, WriterDto>().ReverseMap();
             CreateMap<Writer, WriterCreateDto>().ReverseMap();
+            CreateMap<Comment, CommentDto>().ReverseMap();
+            CreateMap<Comment, CommentCreateDto>().ReverseMap();
         }
 
         

@@ -9,11 +9,10 @@ namespace DatabaseLayer.IdentityModels
 {
     public class Writer : IdentityUser
     {
-        public string Country { get; set; }
-        public DateTime Birthday { get; set; }
-        public DateTime JoinTime { get; set; }
-        public string Rate { get; set; }
-        public string WebPage { get; set; }
+        public DateTime? Birthday { get; set; }
+        public DateTime? JoinTime { get; set; }
+        public int? Rate { get; set; }
+        public string? WebPage { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
         public ICollection<FollowedWriter> FollowedWriters { get; set; }
 

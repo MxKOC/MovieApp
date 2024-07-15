@@ -11,9 +11,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DataAccessLayer.Context
 {
-    public class IdentityContext : IdentityDbContext<User>
+    public class IdentityContext : IdentityDbContext<IdentityUser>
     {
-        public DbSet<User> Users { get; set; }
         public DbSet<Writer> Writers { get; set; }
         public DbSet<Reader> Readers { get; set; }
 
